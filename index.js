@@ -47,6 +47,10 @@ text {
   padding-right: 19px;
 }
 
+text > div {
+  border: none !important;
+}
+
 table {
   color: inherit;
   font-size: inherit;
@@ -190,6 +194,11 @@ app.get('/', async function(req, res) {
 
 app.get('/s1', async function(req, res) {
   const html = await transform(`https://www.google.com/search?btnI&q=sec%20s1%20${req.query.company}`)
+  res.send(html)
+})
+
+app.get('/url', async function(req, res) {
+  const html = await transform(req.query.q)
   res.send(html)
 })
 
