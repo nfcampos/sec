@@ -47,6 +47,10 @@ text {
   padding-right: 19px;
 }
 
+font {
+  font: inherit;
+}
+
 text > div {
   border: none !important;
 }
@@ -106,13 +110,19 @@ text > p, table {
   )
   // fix img urls
   $('img').attr('src', (i, val) => prefix + '/' + val)
-  // remove empty p
+  // remove empty p, font
+  $('font').filter((i, el) => {
+    const $el = $(el)
+    return $el.children().length === 0 && $el.text().trim() === ''
+  }).remove()
   $('p').filter((i, el) => {
     const $el = $(el)
     return $el.children().length === 0 && $el.text().trim() === ''
   }).remove()
   // remove repeated style on every p and table
   $('p').removeAttr('style')
+  $('font').removeAttr('size')
+  $('font').removeAttr('style')
   $('table').removeAttr('style')
   // remove links to TOC
   $('h5').remove()
@@ -185,7 +195,7 @@ app.get('/', async function(req, res) {
       </head>
       <body class="wb">
         <form action="/s1" method="get">
-          <input type="text" name="company" placeholder="eg. farfetch" value="">
+          <input type="text" name="q" placeholder="eg. farfetch" value="">
         </form>
       </body>
     </html>
@@ -193,7 +203,11 @@ app.get('/', async function(req, res) {
 })
 
 app.get('/s1', async function(req, res) {
-  const html = await transform(`https://www.google.com/search?btnI&q=sec%20s1%20${req.query.company}`)
+  const html = await transform(
+    req.query.q.startsWith('http')
+      ? req.query.q
+      : `https://www.google.com/search?btnI&q=sec%20s1%20${req.query.q}`
+  )
   res.send(html)
 })
 
