@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "search.js", "use": "@now/node" },
+    { "src": "index.html", "use": "@now/static" }
+  ],
+  "routes": [
+    { "src": "/url", "dest": "search.js" },
+    { "src": "/search", "dest": "search.js" }
+  ]
+}
