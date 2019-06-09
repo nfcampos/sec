@@ -40,6 +40,10 @@ body.wb {
   color: #f2f2f2;
 }
 
+img {
+  max-width:100%;
+}
+
 text {
   display: block;
   padding-left: 19px;
@@ -109,6 +113,7 @@ text > p, table {
   );
   // fix img urls
   $("img").attr("src", (i, val) => prefix + "/" + val);
+
   // remove empty p, font
   $("font")
     .filter((i, el) => {
@@ -122,19 +127,39 @@ text > p, table {
       return $el.children().length === 0 && $el.text().trim() === "";
     })
     .remove();
+  $("center")
+    .filter((i, el) => {
+      const $el = $(el);
+      return $el.children().length === 0 && $el.text().trim() === "";
+    })
+    .remove();
+
   // remove repeated style on every p and table
+  $("body").removeAttr("style");
   $("p").removeAttr("style");
   $("font").removeAttr("size");
   $("font").removeAttr("style");
   $("table").removeAttr("style");
+  $("div").removeAttr("style");
+  $("[align=justify]").removeAttr("align");
+
+  // TOC stuff
+  if ($("#toc").length === 0) {
+    $('*:icontains("TABLE OF CONTENTS")')
+      .last()
+      .attr("id", "toc");
+  }
+  $("td a").removeAttr("style");
+  $("tr")
+    .has("td a")
+    .removeAttr("style");
   // remove links to TOC
   $("h5").remove();
+
   // replace light blue table color with class
   $('tr[bgcolor="#cceeff"]')
     .removeAttr("bgcolor")
     .addClass("tr-heading");
-  // remove fixed width
-  $("div").css({ width: "initial" });
 
   // add toc button
   $("body").append(`<a class="toc-button button" href="#toc">TOC</a>`);
