@@ -175,12 +175,12 @@ text > p, table {
 const app = express();
 
 app.get("*", async function search(req, res) {
-  const html = await transform(
-    req.query.q.startsWith("http")
-      ? req.query.q
-      : `https://www.google.com/search?btnI&q=sec%20s1%20${req.query.q}`
-  );
-  res.send(html);
+  if (req.query.q.startsWith("http")) {
+    const html = await transform(req.query.q);
+    res.send(html);
+  } else {
+    res.redirect(`https://www.google.com/search?q=sec%20s1%20${req.query.q}`);
+  }
 });
 
 module.exports = app;

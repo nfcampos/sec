@@ -26,6 +26,7 @@
       body.wb {
         background-color: black;
         color: #cccccc;
+        padding: 0 20px;
       }
 
       * {
@@ -42,18 +43,68 @@
         background-color: inherit;
       }
 
-      .wb {
+      input::placeholder {
+        opacity: 0.4;
+      }
+
+      h1 {
+      }
+
+      .center {
+        text-align: center;
+      }
+
+      a {
+        color: inherit;
       }
 
       form {
         width: 100%;
-        padding: 100px 20px 0;
+        padding: 50px 0 20px;
       }
     </style>
   </head>
   <body class="wb">
     <form action="/search" method="get">
-      <input type="text" name="q" placeholder="eg. farfetch" value="" />
+      <input type="text" name="q" placeholder="https://sec.gov/..." value="" />
     </form>
+    <ul>
+      <li>
+        <a
+          href="/search?q=https://www.sec.gov/Archives/edgar/data/1740915/000119312518252315/d532260df1.htm"
+          >Farfetch</a
+        >
+      </li>
+      <li>
+        <a
+          href="/search?q=https://www.sec.gov/Archives/edgar/data/1576942/000119312517313629/d400510ds1.htm"
+          >Stitch Fix</a
+        >
+      </li>
+      <li>
+        <a
+          href="/search?q=https://www.sec.gov/Archives/edgar/data/1746618/000119312519157516/d669074ds1a.htm"
+          >Revolve</a
+        >
+      </li>
+      <li>
+        <a
+          href="/search?q=https://www.sec.gov/Archives/edgar/data/1746618/000119312519157516/d669074ds1a.htm"
+          >Uber</a
+        >
+      </li>
+      <li>
+        <a
+          href="/search?q=https://www.sec.gov/Archives/edgar/data/1759509/000119312519059849/d633517ds1.htm"
+          >Lyft</a
+        >
+      </li>
+      <li>
+        <a
+          href="/search?q=https://www.sec.gov/Archives/edgar/data/1372612/000119312514439087/d642425ds1a.htm"
+          >Box</a
+        >
+      </li>
+    </ul>
   </body>
 </html>
